@@ -1,0 +1,283 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+/* 상단 nav bar 만들기 */
+html{
+    font-family: sans-serif;
+    font-weight: normal;
+}
+
+#main-image{
+    border-radius: 50% ;
+    height:160px;
+    display: block;
+    margin:auto;
+}
+
+.indigo{
+background-color: #3f51b5;
+}
+
+header{
+    width: 100%
+    height:100px;
+    padding: 25px;
+    color: #fff;
+    text-align: center;
+
+}
+header h1{
+    text-align:center;
+    font-size : 20px
+}
+
+header p{
+    display:inline-block;
+    line-height: 10px;
+    padding:6px 10px;
+
+
+    background-color: #FAF46A;
+    color:rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+
+    font-style:italic;
+
+
+}
+
+header.navbar{
+    margin: 0 auto;
+}
+header ul li {
+    list-style-type:none;
+    text-align:center;
+    display:inline-block;
+    padding:20px;
+    font-size: 39.5px;
+    margin:0 25px;
+}
+
+/* first div 만들기 */
+
+section{
+    padding: 0 100px 0px 100px;
+    width:95%;
+}
+
+.first-container{
+text-align: center;
+overflow:hidden;
+padding: 30px 0 30px 0;
+}
+
+.col-s12-m8{
+    width:66.5%;
+    float:left;
+}
+.col-s12-m8 > h2{
+    font-size: 20px;
+    font-weight:400px;
+    text-align: left;
+    margin-bottom:30px;
+    color: #3f51b5;
+
+    /* 이 라인을 어떻게 만들어야 할 지 모르겠어서 페이지 소스에서 가져왔습니다 ㅠ */
+    top: 50%;
+    left: 0;
+    width: 100%;
+    border-bottom: 4px solid #dddddd;
+    color:#3f51b5;
+    float:left;
+}
+.first-text p{
+    font-size: 20px;
+}
+
+.col-s12-m4{
+    width:33.3%;
+    padding:30px 30px;
+    float:right;
+    overflow:hidden;
+}
+
+.col-s12-m4 > h2{
+    font-size: 20px;
+    font-weight:400px;
+
+
+    top: 50%;
+    left: 0;
+    width: 100%;
+    border-bottom: 4px solid #dddddd;
+    color:#ff4081;
+    float:left;
+
+}
+.tweetercard{
+    background-color: #c5cae9;
+    margin: 10px 10px;
+    border-radius: 2px;
+    float:right;
+    padding: 10px 10px;
+
+}
+
+/* 파란 색 칸 세개 나눠져 있는거 만들기 */
+
+.row{
+text-align:center;
+margin-bottom:40px;
+
+}
+.whitecontent {
+    background-color: #3f51b5;
+    min-height: 230px;
+    padding:20px;
+}
+
+.whitecontent a{
+    font-size:24px;
+    font-weight:300;
+    line-height: 20px;
+    color:white;
+    font-weight:bold;
+}
+.whitecontent p{
+   color: rgb(255, 255, 255);
+   margin:30px 10px;
+
+}
+.row-bottom{
+    text-align:center;
+}
+
+.all-repository{
+    display:inline-block;
+    font-size: 18px;
+    padding: 10px 10px;
+    background-color: #ff4081;
+}
+
+
+
+
+
+/* work process 만들기 */
+
+#philosophy{order:1;}
+#mymission{order:2;}
+#myprocess{order:3;}
+
+.workprocess{
+
+text-align:center;
+}
+
+.card{
+    height:420px;
+    border-radius:2px
+    border-style:solid;
+    border-color:grey;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    transition: box-shadow .25s
+}
+.cardcontent {
+    position:relative;
+}
+
+.cardcontent > span{
+    position:absolute;
+    color: white;
+    font-size:24px;
+    font-weight:bold;
+    display:inline-block;
+}
+
+.cardcontent>p{
+    font-size:16px;
+    font-weight:300px;
+    padding:20px 20px;
+}
+
+#work{
+
+    font-size: 22px;
+    font-weight: 400;
+    text-align: left;
+}
+/* footer */
+.container-fluid{
+    color: #FFFFFF;
+    text-align:center;
+    width:100%;
+}
+
+
+.container-fluid>h5{
+    color: #FFFFFF;
+    margin :50px 0px 20px 0px;
+    font-size:30px;
+}
+
+.container-fluid p{
+    color: #FFFFFF;
+    text-align:center;
+    font-size:18px;
+
+}
+.linktofooter{
+    text-align: center;
+    width: 50%;
+    margin: 0 auto 40px;
+    line-height: 30px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+#bottom{
+    background-color:#303f9f;
+    width:100%;
+}
+
+/* funfacts */
+.funfacts{
+    text-align: center;
+}
+
+.pinkcard{
+   background-color: #f50057;
+    border-radius: 2px;
+    line-height:48px;
+
+}
+
+.fighting{
+    display: block;
+    font-size: 50px;
+
+}
+.usual {
+    font-size: 24px;
+    font-weight: 300;
+    display:inline-block;
+}
+
+.cardcontent2{
+    padding: 20px;
+    margin:20px;
+    color:white;
+}
+
+.cardcontent2 > p{
+
+}
+
+.col-s4-m2{
+    display:inline-block;
+    margin-left: 0;
+    width:15%;
+}
+
