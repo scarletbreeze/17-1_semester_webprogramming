@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./dist/logo.ico">
+
+    <title>Edit</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./dist/css/cover.css" rel="stylesheet">
+    <script src="./dist/ckeditor/ckeditor.js"></script>
+  </head>
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+            <a href="./index.html">
+                <h3 class="masthead-brand">Cover</h3>
+            </a>
+
+              <!-- <a class ="masthead-brand"><img src="./dist/logo.ico" alt="logo"></a> -->
+              <nav class="nav nav-masthead">
+                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Contact</a>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h3 class="post-heading">Cover your page.</h3>
+            <p class="lead">여기에 게시물의 글을 써야겠지.
+            <p>
+            <p class="lead"></p>
+
+            <form style ="">
+              <textarea name="editor1" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+              </textarea>
+              <script>
+              // CKEDITOR.config.width = 500;
+              // CKEDITOR.config.height = 500;
+
+
+
+
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1'  );
+              </script>
+            </form>
+
+
+          </div>
+
+
+
+
+
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="https://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--Fire base -->
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDVfzGj9effOPWHEawF4XoRUVR7EprnqeU",
+      authDomain: "webprogramming-27026.firebaseapp.com",
+      databaseURL: "https://webprogramming-27026.firebaseio.com",
+      projectId: "webprogramming-27026",
+      storageBucket: "webprogramming-27026.appspot.com",
+      messagingSenderId: "97991502624"
+      };
+    firebase.initializeApp(config);
+    </script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="./dist/js/ie10-viewport-bug-workaround.js"></script> -->
+  </body>
+</html>
