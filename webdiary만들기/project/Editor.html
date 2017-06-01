@@ -68,23 +68,7 @@
                 CKEDITOR.replace( 'editor1'  );
               </script>
 
-            <!-- 저장하기 -->
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary mt-5">저장하기</a>
-            </p>
-            </form>
-          </div>
 
-
-              <div class="input-field">
-                <input id="INPUT_MESSAGE" type="text" class="validate">
-              </div>
-                <p>
-                  <label id="DB_MESSAGE" class="text"></label>
-                </p>
-              <div class="input-field">
-                <button id="BTN_UPDATE" type="button" class="btn indigo">변경하기</button>
-              </div>
 
 
 
@@ -99,39 +83,6 @@
       </div>
 
     </div>
-
-
-
-   <!--Firebase SDK link -->
-  <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-messaging.js"></script>
-   <!--Firebase SDk CDN -->
-  <script src="./js/firebase.js"></script>
-  <script src="./js/main.js"></script>
-
-
-  <!-- 데이터베이스에 쓰기 -->
-  <script>
-    // Get a reference to the database service
-    var database = firebase.database();
-
-    firebase.database().ref('/메세지').set('안녕하세요.');
-
-
-    // //  데이터베이스에 메세지 읽어오기
-    firebase.database().ref('/메세지').on('/value', function(snapshot){
-      var message = snapshot.val();
-      $("#DB_MESSAGE").text(message);
-    });
-
-    // //데이터를 수정하는 코드
-    // $("#BTN_UPDATE").click(function(){
-    //   var new_message = $("#INPUT_MESSAGE").val();
-    //   firebase.database().ref('/메세지').set(new_message);
-    // });
 
 
   </script>
