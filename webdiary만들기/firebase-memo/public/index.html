@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+
+      <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+          ::-webkit-scrollbar {
+              display:none;
+          }
+          .collection { cursor: pointer;}
+
+          .txt_createDate{
+            font-size: 13px;
+            color: darkolivegreen;
+          }
+
+          .txt_title {
+            font-size: 20px;
+          }
+
+
+        </style>
+    </head>
+
+    <body>
+      <div class="row">
+        <div class="col s3" style="padding:0; margin:0; overflow-y:auto; overflow-x:hidden; height:1080px; -ms-overflow-style: none;">
+          <nav style="text-align: center ">
+            <span style="font-size: 30px">메모</span>
+          </nav>
+          <!-- Grey navigation panel -->
+          <ul class="collection"  style="padding:0; margin:0;"></ul>
+        </div>
+
+    <div class="col s9" style="padding:0; margin:0; max-height:1080px;">
+      <!-- Teal page content  -->
+      <nav>
+        <div class="nav-wrapper">
+          <div class="col s12">
+            <a href="#!" class="breadcrumb"><span id="modifyDate"></span></a>
+
+          </div>
+        </div>
+      </nav>
+
+      <textarea style="height:1000px; border-top:0; border-color: darkgray" class="textarea" width="100%" rows="1000" placeholder="새로운 메모를 입력해보세요^^"></textarea>
+    </div>
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large waves-effect waves-light blue" onclick='initMemo();'><i class="material-icons">add</i></a>
+    </div>
+
+    <div class="preloader-wrapper big active" style="position:absolute; z-index:1000; left:50%; top:50%; display:none;">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+      <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+      <script>
+
+          Date.prototype.format = function(f) {
+            if (!this.valueOf()) return " ";
+
+            var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+            var d = this;
+
+            return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
+                switch ($1) {
+                    case "yyyy": return d.getFullYear();
+                    case "yy": return (d.getFullYear() % 1000).zf(2);
+                    case "MM": return (d.getMonth() + 1).zf(2);
+                    case "dd": return d.getDate().zf(2);
+                    case "E": return weekName[d.getDay()];
+                    case "HH": return d.getHours().zf(2);
+                    case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2);
+                    case "mm": return d.getMinutes().zf(2);
+                    case "ss": return d.getSeconds().zf(2);
+                    case "a/p": return d.getHours() < 12 ? "오전" : "오후";
+                    default: return $1;
+                }
+            });
+        };
+
+        String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
+        String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
+        Number.prototype.zf = function(len){return this.toString().zf(len);};
+
+
+        var auth, database, userInfo, selectedKey;
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyDuILSES-HFyiS7uXhRNc5Idc7G9oek9Do",
+            authDomain: "memo-b1e61.firebaseapp.com",
+            databaseURL: "https://memo-b1e61.firebaseio.com",
+            projectId: "memo-b1e61",
+            storageBucket: "memo-b1e61.appspot.com",
+            messagingSenderId: "829856771419"
+          };
+          firebase.initializeApp(config);
+        auth = firebase.auth();
+        database = firebase.database();
+
+
+        var authProvider = new firebase.auth.GoogleAuthProvider();
+
+
+        auth.onAuthStateChanged(function(user) {
+          if(user) {
+
+            // 인증 성공
+            console.log("success");
+            console.log(user);
+
+            //  메모 리스트 출력
+            userInfo = user;
+            get_memo_list();
+
+          }else {
+
+            // 인증 실패
+            auth.signInWithPopup(authProvider);
+          }
+        });
+
+        function get_memo_list(){
+            console.log(userInfo.uid);
+            var memoRef = database.ref('memos/' + userInfo.uid);
+            memoRef.on('child_added', on_child_added);
+            memoRef.on('child_changed', function(data) {
+              console.log(data.key);
+              console.log(data.val());
+              var key = data.key;
+              var txt = data.val().txt;
+              var title = txt.substr(0, txt.indexOf('\n'));
+
+              $("#" + key + " > .title").text(title);
+              $("#" + key + " > .txt").text(txt);
+            });
+
+        }
+
+        function on_child_added(data) {
+
+          var key = data.key;
+          var memoData = data.val();
+          var txt = memoData.txt;
+          var title = txt.substr(0, 15);
+          var firstTxt = txt.substr(0, 1);
+          var updateDate = new Date(memoData.updateDate).format("yyyy-MM-dd hh:mm:ss E");
+
+          var html = "<li id='" + key + "' class=\"collection-item avatar\" onclick=\"fn_get_data_one(this.id);\">" +
+                    "<i class=\"material-icons circle blue\">" + firstTxt + "</i>" +
+                    "<span class=\"txt_createDate\">" + updateDate + "</span>" +
+                    "<p class='txt_title'>" + title + "<br>" +
+                    "</p>" +
+                    "<a href=\"#!\" onclick=\"fn_delete_data('" + key +"')\" class=\"secondary-content\"><i class=\"material-icons\">delete</i></a>"
+                    "</li>";
+
+          $(".collection").append(html);
+        }
+
+        function fn_delete_data(key) {
+          if (!confirm('선택한 메모를 삭제하시겠습니까?')) {
+            return;
+          }
+          var memoRef = database.ref('memos/' + userInfo.uid + "/" + key);
+          memoRef.remove();
+          $("#" + key).remove();
+          initMemo();
+        }
+
+        function fn_get_data_one(key) {
+          selectedKey = key;
+          var memoRef = database.ref('memos/' + userInfo.uid + "/" + key).once('value').then(function(snapshot) {
+            $(".textarea").val(snapshot.val().txt);
+            $("#modifyDate").html(new Date(snapshot.val().updateDate).format("yyyy-MM-dd hh:mm:ss E"));
+          });
+        }
+
+        function save_data() {
+          var memoRef = database.ref('memos/' + userInfo.uid);
+          var txt = $(".textarea").val();
+
+          if (txt == '') {
+            return;
+          }
+
+          if (selectedKey) {
+            memoRef = database.ref('memos/' + userInfo.uid + "/" + selectedKey);
+            memoRef.update({
+              txt: txt,
+              updateDate: new Date().getTime()
+            });
+          }else {
+            //push
+            memoRef.push({
+              txt: txt,
+              createDate: new Date().getTime(),
+              updateDate: new Date().getTime()
+            });
+          }
+        }
+
+        function initMemo() {
+          $('.textarea').val('');
+          $("#modifyDate").html('');
+          selectedKey = null;
+        }
+
+        $(function(){
+          $(".textarea").blur(function() {
+            save_data();
+          });
+        });
+
+
+      </script>
+
+    </body>
+  </html>
+
